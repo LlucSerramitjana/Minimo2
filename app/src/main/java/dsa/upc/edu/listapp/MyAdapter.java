@@ -17,7 +17,7 @@ import dsa.upc.edu.listapp.github.Repos;
 import dsa.upc.edu.listapp.github.User;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private List<Follower> values;
+    private List<Repos> values;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -40,12 +40,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
 
 
-    public void setData(List<Follower> myDataset) {
+    public void setData(List<Repos> myDataset) {
         values = myDataset;
         notifyDataSetChanged();
     }
 
-    public void add(int position, Follower item) {
+    public void add(int position, Repos item) {
         values.add(position, item);
         notifyItemInserted(position);
     }
@@ -60,7 +60,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(List<Follower> myDataset) {
+    public MyAdapter(List<Repos> myDataset) {
         values = myDataset;
     }
 
@@ -83,8 +83,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        Follower c = values.get(position);
-        final String name = c.login;
+        Repos c = values.get(position);
+        final String name = c.name;
+        final String language = c.language;
+        holder.txtFooter.setText(language);
         holder.txtHeader.setText(name);
         holder.txtHeader.setOnClickListener(new OnClickListener() {
             @Override
@@ -93,11 +95,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             }
         });
 
-        holder.txtFooter.setText("");
 
-        GlideApp.with(holder.icon.getContext())
-                .load(c.avatar_url)
-                .into(holder.icon);
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)

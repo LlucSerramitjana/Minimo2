@@ -22,4 +22,6 @@ public interface GitHub {
             .baseUrl(URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build();*/
+    @GET("/users/{username}/repos")
+    Call<List<Repos>> repos(@Path("username") String username);
 }

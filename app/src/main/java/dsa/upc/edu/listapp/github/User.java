@@ -13,8 +13,8 @@ public class User {
         this.login = login;
     }
 
-    public int getPublic_repos() {
-        return public_repos;
+    public int getFollowing() {
+        return following;
     }
 
     public String getAvatar_url() {
@@ -22,17 +22,17 @@ public class User {
     }
 
     public  String login = "";
-    public final int public_repos;
     public final String avatar_url;
     public final int followers;
-    public User(String login, int public_repos, String avatar_url, int followers) {
+    public final int following;
+    public User(String login, int following, String avatar_url, int followers) {
         this.login = login;
         this.followers = followers;
-        this.public_repos = public_repos;
+        this.following = following;
         this.avatar_url = avatar_url;
     }
     @Override
     public String toString() {
-        return login+" ("+public_repos+")";
+        return login+" ("+following+")";
     }
 }

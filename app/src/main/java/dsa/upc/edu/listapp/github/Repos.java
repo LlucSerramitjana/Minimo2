@@ -1,10 +1,12 @@
 package dsa.upc.edu.listapp.github;
 
 public class Repos {
-    public final int id;
+    public final String name;
+    public final String language;
 
-    public Repos(int id)
+    public Repos(String name, String language)
     {
-        this.id = id;
+        this.name = name;
+        this.language = language;
     }
 }

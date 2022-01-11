@@ -99,6 +99,7 @@ public class CredentialsActivity extends AppCompatActivity{
         Intent intent = new Intent(this, SplashScreen.class);
         this.startActivity(intent);
     }
+
     public static String getUsername() {
         return username;
     }

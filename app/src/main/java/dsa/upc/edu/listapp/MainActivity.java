@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         TextView num_repos = (TextView) findViewById(R.id.secondLine2);
         TextView following = (TextView) findViewById(R.id.firstLine2);
         ImageView avatar = (ImageView) findViewById(R.id.icon2);
-        num_repos.setText("Repositories: "+user.getPublic_repos());
+        num_repos.setText("Followers: "+user.getFollowing());
         following.setText("Following: " + user.getFollowers());
         Glide.with(getApplicationContext())
                 .load(user.getAvatar_url())
@@ -116,17 +116,17 @@ public class MainActivity extends AppCompatActivity {
     }
     //prova2
     private void doApiCall(final SwipeRefreshLayout mySwipeRefreshLayout, String username) {
-        Call<List<Follower>> call = gitHub.followers(username);
-        call.enqueue(new Callback<List<Follower>>() {
+        Call<List<Repos>> call = gitHub.repos(username);
+        call.enqueue(new Callback<List<Repos>>() {
             @Override
-            public void onResponse(Call<List<Follower>> call, Response<List<Follower>> response) {
+            public void onResponse(Call<List<Repos>> call, Response<List<Repos>> response) {
                 // set the results to the adapter
                 adapter.setData(response.body());
 
                 if(mySwipeRefreshLayout!=null) mySwipeRefreshLayout.setRefreshing(false);
             }
             @Override
-            public void onFailure(Call<List<Follower>> call, Throwable t) {
+            public void onFailure(Call<List<Repos>> call, Throwable t) {
                 if(mySwipeRefreshLayout!=null) mySwipeRefreshLayout.setRefreshing(false);
 
                 String msg = "Error in retrofit: "+t.toString();
