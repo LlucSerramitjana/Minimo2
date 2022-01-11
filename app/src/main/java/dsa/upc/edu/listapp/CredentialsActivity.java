@@ -1,7 +1,9 @@
 package dsa.upc.edu.listapp;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,7 +30,7 @@ public class CredentialsActivity extends AppCompatActivity{
 
 
     TextView usernameEditText;
-
+    TextView errorEditText;
     Context context;
     SharedPreferences sharedPref;
 
@@ -49,12 +51,13 @@ public class CredentialsActivity extends AppCompatActivity{
     protected  void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.credentials);
+
         //context.this;
         sharedPref = getSharedPreferences("userlogged", context.MODE_PRIVATE);
 
         Intent intent = getIntent();
         usernameEditText = findViewById(R.id.usernameEditText);
-
+        errorEditText = findViewById(R.id.errorEditText);
         createAPI();
     }
     public void fetch_click(View view){
@@ -79,7 +82,22 @@ public class CredentialsActivity extends AppCompatActivity{
                     openMainActivity();
                 }
                 else{
-                    String text = "User not found, try again!";
+                    //errorEditText.setText("Error: Something went wrong");
+                    //openErrorActivity();
+                    /*Toast errorToast = Toast.makeText(CredentialsActivity.this, "Error, pls chech your internet connection and try again!", Toast.LENGTH_SHORT);
+                    errorToast.show();*/
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CredentialsActivity.this);
+                    builder.setCancelable(true);
+                    builder.setTitle("Error");
+                    builder.setMessage("Something went wrong, try again");
+                    builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+                    builder.show();
+
                 }
             }
 
@@ -95,8 +113,13 @@ public class CredentialsActivity extends AppCompatActivity{
             }
         });
     }
+
     public void openMainActivity(){
         Intent intent = new Intent(this, SplashScreen.class);
+        this.startActivity(intent);
+    }
+    public void openErrorActivity(){
+        Intent intent = new Intent(this, SplashScreen2.class);
         this.startActivity(intent);
     }
 
