@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 .load(user.getAvatar_url())
                 .into(avatar);
     }
-
+    //prova
     private void doApiCall(final SwipeRefreshLayout mySwipeRefreshLayout, String username) {
         Call<List<Follower>> call = gitHub.followers(username);
         call.enqueue(new Callback<List<Follower>>() {
